@@ -270,48 +270,98 @@
 
 .submit-button {
   width: 100%;
-  background: linear-gradient(45deg, #4285f4, #0af15fe6);
+  max-width: 300px;
+  margin: 1.5rem auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #4e7eff 0%, #4cffb2 100%);
   color: white;
   border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(78, 126, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
   padding: 1.2rem 2rem;
   border-radius: 15px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 1rem;
 }
 
 .submit-button:not(.submitting):not(.success):not(.error):hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 25px rgba(78, 126, 255, 0.5);
+}
+
+.submit-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 10px rgba(78, 126, 255, 0.3);
 }
 
 .submit-button:disabled {
-  opacity: 0.7;
+  background: #ccc;
   cursor: not-allowed;
-  transform: none !important;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
 }
 
+.submit-button .arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+  font-size: 1.2em;
+}
+
+.submit-button:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Loading state */
 .submit-button.submitting {
-  background: linear-gradient(45deg, #167dea, #167dea);
+  opacity: 0.8;
+  cursor: progress;
 }
 
+/* Success state */
 .submit-button.success {
-  background: linear-gradient(45deg, #167dea, #1680f1);
+  background: linear-gradient(90deg, #4caf50, #66bb6a);
 }
 
+/* Error state */
 .submit-button.error {
-  background: linear-gradient(45deg, #f44336, #f34141);
+  background: linear-gradient(90deg, #f44336, #ef5350);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .submit-button {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .submit-button {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.8rem 1.2rem;
+  }
 }
 
 .spinner {

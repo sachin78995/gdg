@@ -1,26 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './About.css';
 
+// Register ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
 const About = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const containerRef = useRef();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  // Define stats data here for easy counting animation
+  const stats = [
+    { label: "Active Members", value: 500, suffix: "+" },
+    { label: "Events Hosted", value: 50, suffix: "+" },
+    { label: "Projects Built", value: 30, suffix: "+" },
+    { label: "Tech Domains", value: 10, suffix: "+" }
+  ];
 
   const cards = [
     {
@@ -62,34 +58,105 @@ const About = () => {
     }
   ];
 
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%", // Animation starts when top of section hits 80% of viewport
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    // 1. Title & Subtitle Fade In
+    tl.from([".about-title", ".about-subtitle"], {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out"
+    })
+
+    // 2. Cards Pop In (Staggered)
+    .from(".about-card", {
+      y: 100,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.15, // Delay between each card
+      ease: "back.out(1.7)" // Nice bouncy effect
+    }, "-=0.4")
+
+    // 3. Stats Container Appearance
+    .from(".stats-container", {
+      scale: 0.9,
+      opacity: 0,
+      duration: 0.6,
+      ease: "power2.out"
+    }, "-=0.2");
+
+    // 4. NUMBER COUNTING ANIMATION
+    // This runs independently when the stats section is visible
+    stats.forEach((stat, index) => {
+      // Find the specific number element
+      const element = document.getElementById(`stat-num-${index}`);
+      
+      gsap.to(element, {
+        innerText: stat.value, // Animate to this value
+        duration: 2,
+        snap: { innerText: 1 }, // Snap to whole numbers (no decimals)
+        scrollTrigger: {
+          trigger: ".stats-container",
+          start: "top 85%",
+        },
+        ease: "power1.out",
+        onUpdate: function() {
+          // Keep the suffix (+) during animation if needed, 
+          // or just append it via CSS/Layout
+          element.innerText = Math.ceil(this.targets()[0].innerText) + stat.suffix;
+        }
+      });
+    });
+
+    // 5. FLOATING SHAPES (Organic Movement)
+    gsap.to(".shape", {
+      y: "random(-40, 40)",
+      x: "random(-20, 20)",
+      rotation: "random(-180, 180)",
+      duration: "random(10, 20)",
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      stagger: {
+        amount: 5,
+        from: "random"
+      }
+    });
+
+  }, { scope: containerRef });
+
   const handleCardClick = (card) => {
-    if (card.whatsapp) {
-      window.open(card.whatsapp, '_blank');
-    } else {
-      // Handle other card actions
-      console.log(`Clicked on ${card.title} card`);
-    }
+    if (card.whatsapp) window.open(card.whatsapp, '_blank');
   };
 
   return (
-    <section id="about" className="about" ref={sectionRef}>
+    <section id="about" className="about" ref={containerRef}>
       <div className="about-container">
-        <div className={`about-header ${isVisible ? 'animate' : ''}`}>
+        <div className="about-header">
           <h2 className="about-title">Why join GDG-CITech?</h2>
           <p className="about-subtitle">
             Discover the four pillars that make our community unique
           </p>
         </div>
 
-        <div className={`about-grid ${isVisible ? 'animate' : ''}`}>
+        <div className="about-grid">
           {cards.map((card, index) => (
             <div
               key={card.id}
               className={`about-card ${card.id}-card`}
-              style={{ '--delay': `${index * 0.2}s`, '--color': card.color }}
+              style={{ '--color': card.color }}
               onClick={() => handleCardClick(card)}
             >
               <div className="card-inner">
+                {/* FRONT */}
                 <div className="card-front">
                   <div className="card-icon" style={{ background: card.gradient }}>
                     <span className="icon">{card.icon}</span>
@@ -98,6 +165,7 @@ const About = () => {
                   <p className="card-description">{card.description}</p>
                 </div>
                 
+                {/* BACK */}
                 <div className="card-back" style={{ background: card.gradient }}>
                   <div className="card-back-content">
                     <h3 className="card-back-title">{card.title}</h3>
@@ -109,30 +177,20 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              
               <div className="card-glow" style={{ background: card.gradient }}></div>
             </div>
           ))}
         </div>
 
-        <div className={`about-bottom ${isVisible ? 'animate' : ''}`}>
+        <div className="about-bottom">
           <div className="stats-container">
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Active Members</div>
-            </div>
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Events Hosted</div>
-            </div>
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Projects Built</div>
-            </div>
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Tech Domains</div>
-            </div>
+            {stats.map((stat, index) => (
+              <div className="stat" key={index}>
+                {/* The span id allows GSAP to target just the number */}
+                <div className="stat-number" id={`stat-num-${index}`}>0{stat.suffix}</div>
+                <div className="stat-label">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

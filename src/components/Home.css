@@ -1,3 +1,10 @@
+/* =========================================
+  1. NEW LAYOUT & BACKGROUND (Paste this at the top)
+  ========================================= */
+
+/* Import futuristic font for description */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@400;600&display=swap');
+
 .home {
   min-height: 100vh;
   display: flex;
@@ -5,7 +12,16 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: #fff;
+  /* subtle animated gradient background */
+  background: linear-gradient(-45deg, #ffffff, #f0f4ff, #fff5f5, #fffdf0);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .particle-background {
@@ -20,218 +36,148 @@
 #particle-canvas {
   width: 100%;
   height: 100%;
-  opacity: 0.6;
+  opacity: 1; /* Make sure this is 1 so lines are visible */
 }
 
+/* Glass Card for Content */
 .home-container {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
+  max-width: 1100px;
+  width: min(1100px, 94%);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: clamp(1.25rem, 3.5vw, 3rem);
   text-align: center;
-  color: black;
+
+  /* The Glass Effect */
+  background: transparent;
+  /* backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.06); */
 }
+
+.description {
+  /* Futuristic style: Orbitron primary, Exo 2 fallback */
+  font-family: 'Orbitron', 'Exo 2', 'Inter', system-ui, -apple-system, Roboto, sans-serif;
+  color: #374151; /* slightly muted dark */
+  font-weight: 500;
+  font-size: clamp(0.95rem, 1.2vw + 0.9rem, 1.25rem);
+  line-height: 1.75;
+  margin-bottom: clamp(1.5rem, 3vw, 3rem);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  letter-spacing: 0.6px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 6px 18px rgba(56,65,100,0.03);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* =========================================
+   2. EXISTING STYLES (KEEP ALL OF THIS BELOW)
+   ========================================= */
 
 .home-content {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease;
-}
-
-.home-content.loaded {
-  opacity: 1;
-  transform: translateY(0);
+  /* Keep empty or for layout if needed */
 }
 
 .logo-container {
-  margin-bottom: 2rem;
-  animation: logoEntrance 1.5s ease-out 0.5s both;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.main-logo {
-  width: 150px;
-  height: 150px;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-  animation: logoFloat 3s ease-in-out infinite;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto;
-}
-
 .main-logo-simple {
-  width: 150px;
-  height: 150px;
+  /* Responsive circular logo */
+  width: clamp(72px, 12vw, 150px);
+  height: auto;
+  aspect-ratio: 1 / 1;
   display: block;
   margin: 0 auto;
   border-radius: 50%;
-}
-
-@keyframes logoEntrance {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotate(-10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-}
-
-@keyframes logoFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.10));
+  transition: transform 0.3s ease;
 }
 
 .welcome-text {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3rem;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
   font-weight: 800;
-  margin-bottom: 2rem;
-  line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: black;
+  margin-bottom: clamp(1rem, 2.5vw, 2rem);
+  line-height: 1.15;
+  color: #202124;
 }
 
 .welcome-word {
   display: inline-block;
   margin: 0 0.5rem;
-  animation: letterAnimation 0.8s ease-out both;
 }
 
-.welcome-word:nth-child(1) { animation-delay: 1s; }
-.welcome-word:nth-child(2) { animation-delay: 1.2s; }
-.welcome-word:nth-child(3) { animation-delay: 1.4s; }
-.welcome-word:nth-child(4) { animation-delay: 1.6s; }
-
-@keyframes letterAnimation {
-  0% {
-    opacity: 0;
-    transform: rotateX(-90deg) translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: rotateX(0deg) translateY(0px);
-  }
+.gdg-letter {
+    font-weight: 900;
 }
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.gdg-text {
-  background: linear-gradient(45deg, #4285f4, #ea4335);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: letterAnimation 0.8s ease-out both, colorShift 2s ease-in-out infinite 2s;
-}
+.g-blue { color: #4285f4; }
+.g-red { color: #ea4335; }
+.g-yellow { color: #fbbc05; }
 
 .citech-text {
   background: linear-gradient(45deg, #fbbc05, #34a853);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: letterAnimation 0.8s ease-out both, colorShift 2s ease-in-out infinite 2.5s;
 }
 
-@keyframes colorShift {
-  0%, 100% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(30deg); }
-}
-
-.description {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.3rem;
-  line-height: 1.7;
-  margin-bottom: 3rem;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  opacity: 0.95;
-  animation: fadeInUp 1s ease-out 2s both;
-  text-align: center;
-  color: black;
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* CTA buttons container - spacing between buttons */
 .cta-buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem; /* larger horizontal gap */
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 3rem;
-  animation: fadeInUp 1s ease-out 2.4s both;
+  margin-top: 2.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .cta-buttons { gap: 1.5rem; flex-direction: column; align-items: center; }
 }
 
 .cta-button {
-  padding: 1rem 2rem;
+  padding: clamp(0.7rem, 1.25vw, 1rem) clamp(1.25rem, 2.5vw, 2rem);
   border: none;
   border-radius: 50px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  overflow: hidden;
+  letter-spacing: 0.4px;
+
+  /* Flexbox to align text and arrow */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between text and arrow */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.cta-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.cta-button:hover::before {
-  left: 100%;
+.btn-icon {
+  font-size: 1.2rem;
+  
+  font-weight: bold;
+  display: inline-block;
 }
 
 .cta-button.primary {
-  background: linear-gradient(45deg, #4285f4, #3580ea);
+  background: #4285f4;
   color: white;
-  box-shadow: 0 4px 15px rgba(66, 134, 244, 0.888);
-}
-
-.cta-button.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(66, 133, 244, 0.6);
+  box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
 }
 
 .cta-button.secondary {
-    background: #0c070700;
-    color: #0000009e;
-    border: 2px solid rgb(39 37 37 / 80%);
-    backdrop-filter: blur(10px);
-
-}
-
-.cta-button.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #5f6368;
+  border: 1px solid #dadce0;
 }
 
 .scroll-indicator {
@@ -240,12 +186,13 @@
   left: 50%;
   transform: translateX(-50%);
   animation: bounce 2s infinite 3s;
+  opacity: 0.5;
 }
 
 .scroll-arrow {
   width: 2px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.3); /* Darkened for light background */
   position: relative;
 }
 
@@ -259,7 +206,7 @@
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 12px solid rgba(255, 255, 255, 0.6);
+  border-top: 12px solid rgba(0, 0, 0, 0.3);
 }
 
 @keyframes bounce {
@@ -268,74 +215,7 @@
   60% { transform: translateY(-5px) translateX(-50%); }
 }
 
-/* Responsive Design */
+/* Keep your media queries at the very bottom! */
 @media screen and (max-width: 1024px) {
-  .welcome-text {
-    font-size: 2.8rem;
-  }
-  
-  .description, .mission {
-    font-size: 1.2rem;
-  }
-  
-  .main-logo {
-    width: 120px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .home-container {
-    padding: 0 1rem;
-  }
-  
-  .welcome-text {
-    font-size: 2.2rem;
-  }
-  
-  .welcome-word {
-    margin: 0 0.3rem;
-  }
-  
-  .description, .mission {
-    font-size: 1.1rem;
-  }
-  
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .cta-button {
-    width: 100%;
-    max-width: 280px;
-  }
-  
-  .main-logo {
-    width: 100px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .welcome-text {
-    font-size: 1.8rem;
-  }
-  
-  .welcome-word {
-    display: block;
-    margin: 0.2rem 0;
-  }
-  
-  .description, .mission {
-    font-size: 1rem;
-  }
-  
-  .main-logo {
-    width: 80px;
-  }
-  
-  .cta-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-  }
+  /* ... your existing queries ... */
 }

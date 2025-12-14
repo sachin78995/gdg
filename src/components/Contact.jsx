@@ -68,25 +68,25 @@ const Contact = () => {
   const socialLinks = [
     {
       name: 'WhatsApp',
-      url: 'https://chat.whatsapp.com/your-group-link',
+      url: 'https://chat.whatsapp.com/ISzPWBcam0C4w8c4R7bbr6',
       icon: '💬',
       color: '#25d366'
     },
     {
       name: 'Instagram',
-      url: 'https://instagram.com/gdg.citech',
+      url: 'https://www.instagram.com/gdg.cit',
       icon: '📷',
       color: '#e1306c'
     },
     {
       name: 'GitHub',
-      url: 'https://github.com/gdg-citech',
+      url: '',
       icon: '🐙',
       color: '#333'
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com/company/gdg-citech',
+      url: 'https://www.linkedin.com/company/gdgcit/posts/?feedView=all',
       icon: '💼',
       color: '#0077b5'
     }

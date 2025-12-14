@@ -1,6 +1,7 @@
 .about {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  /* Updated Background to transition smoothly from Home */
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7fa 100%);
   padding: 100px 0;
   position: relative;
   overflow: hidden;
@@ -14,17 +15,10 @@
   z-index: 2;
 }
 
+/* REMOVED: opacity/transform/transition from here. GSAP handles it. */
 .about-header {
   text-align: center;
   margin-bottom: 4rem;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease;
-}
-
-.about-header.animate {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .about-title {
@@ -62,27 +56,13 @@
   margin-bottom: 4rem;
 }
 
-.about-grid.animate .about-card {
-  animation: slideInUp 0.8s ease-out both;
-  animation-delay: var(--delay);
-}
-
-@keyframes slideInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(60px) scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
+/* --- CARD STYLES --- */
 .about-card {
   height: 300px;
   perspective: 1000px;
   cursor: pointer;
   position: relative;
+  /* GSAP will animate this, no need for initial CSS transform */
 }
 
 .card-inner {
@@ -111,13 +91,11 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
 }
 
 .card-front {
   background: white;
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,0.05); /* Added slight border for definition */
 }
 
 .card-back {
@@ -154,12 +132,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: #4a4a4a;
-  text-align: center;
-}
-
-.card-back-content {
-  text-align: center;
+  color: #555;
 }
 
 .card-back-title {
@@ -168,26 +141,22 @@
   font-weight: 700;
   margin-bottom: 1rem;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .card-back-description {
   font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1rem;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .card-link {
   background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   color: white;
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 50px;
-  font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
@@ -197,68 +166,39 @@
 }
 
 .card-link:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: white;
+  background: white;
+  color: #333;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.arrow {
-  transition: transform 0.3s ease;
-}
-
-.card-link:hover .arrow {
-  transform: translateX(5px);
 }
 
 .card-glow {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border-radius: 22px;
-  opacity: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 20px;
   z-index: -1;
-  filter: blur(8px);
+  filter: blur(15px);
+  opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .about-card:hover .card-glow {
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
-.about-card:hover .card-front {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.about-bottom {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease 0.6s;
-}
-
-.about-bottom.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+/* --- STATS STYLES --- */
 .stats-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 3rem 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.stat {
-  text-align: center;
-}
+.stat { text-align: center; }
 
 .stat-number {
   font-family: 'Poppins', sans-serif;
@@ -274,10 +214,13 @@
 .stat-label {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  color: #4a4a4a;
-  font-weight: 500;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+/* --- FLOATING SHAPES --- */
 .floating-shapes {
   position: absolute;
   top: 0;
@@ -285,134 +228,23 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  overflow: hidden;
+  pointer-events: none; /* Prevents shapes from blocking clicks */
 }
 
 .shape {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.1;
-  animation: float 20s infinite linear;
+  opacity: 0.08;
+  /* Animation handled by GSAP now */
 }
 
-.shape-1 {
-  width: 100px;
-  height: 100px;
-  background: #069ced;
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-}
+.shape-1 { width: 100px; height: 100px; background: #4285f4; top: 10%; left: 5%; }
+.shape-2 { width: 150px; height: 150px; background: #ea4335; top: 50%; right: 5%; }
+.shape-3 { width: 80px; height: 80px; background: #fbbc05; bottom: 20%; left: 15%; }
+.shape-4 { width: 120px; height: 120px; background: #34a853; top: 20%; right: 20%; }
 
-.shape-2 {
-  width: 150px;
-  height: 150px;
-  background: #ed2f1ef5;
-  top: 60%;
-  right: 10%;
-  animation-delay: -5s;
-}
-
-.shape-3 {
-  width: 80px;
-  height: 80px;
-  background: #edbf33;
-  bottom: 30%;
-  left: 20%;
-  animation-delay: -10s;
-}
-
-.shape-4 {
-  width: 120px;
-  height: 120px;
-  background: #21e342;
-  top: 40%;
-  right: 30%;
-  animation-delay: -15s;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-30px) rotate(120deg); }
-  66% { transform: translateY(30px) rotate(240deg); }
-  100% { transform: translateY(0px) rotate(360deg); }
-}
-
-/* Responsive Design */
-@media screen and (max-width: 1024px) {
-  .about-title {
-    font-size: 2.5rem;
-  }
-  
-  .about-grid {
-    gap: 1.5rem;
-  }
-  
-  .card-front,
-  .card-back {
-    padding: 1.5rem;
-  }
-}
-
+/* Media Queries (Keep existing ones) */
 @media screen and (max-width: 768px) {
-  .about {
-    padding: 80px 0;
-  }
-  
-  .about-container {
-    padding: 0 1rem;
-  }
-  
-  .about-title {
-    font-size: 2rem;
-  }
-  
-  .about-subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .about-card {
-    height: 280px;
-  }
-  
-  .stats-container {
-    padding: 2rem 1rem;
-    gap: 1rem;
-  }
-  
-  .stat-number {
-    font-size: 2.5rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .about-title {
-    font-size: 1.8rem;
-  }
-  
-  .card-title {
-    font-size: 1.5rem;
-  }
-  
-  .card-description {
-    font-size: 0.9rem;
-  }
-  
-  .about-card {
-    height: 260px;
-  }
-  
-  .card-front,
-  .card-back {
-    padding: 1rem;
-  }
-  
-  .stats-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-card { height: 260px; }
 }
