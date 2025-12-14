@@ -1,26 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './About.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const About = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const containerRef = useRef();
+  
+  // Define stats data
+  const stats = [
+    { label: "Active Members",/* value: 500, */ suffix: "+" },
+    { label: "Events Hosted", /*value: 50,*/ suffix: "+" },
+    { label: "Projects Built", /*value: 30,*/ suffix: "+" },
+    { label: "Tech Domains", /*value: 10, */ suffix: "+" }
+  ];
 
   const cards = [
     {
@@ -28,120 +23,155 @@ const About = () => {
       title: 'LEARN',
       description: 'Expand your knowledge through hands-on workshops',
       linkText: 'Explore Resources',
-      color: '#f55648ee',
-      icon: '🎓',
-      gradient: 'linear-gradient(135deg, #f14f40ff, #f74231ee)'
+      color: '#EA4335', // Google Red
+      icon: '🎓'
     },
     {
       id: 'connect',
       title: 'CONNECT',
       description: 'Network with skilled teammates and industry professionals',
       linkText: 'Join Community',
-      color: '#0992e8e6',
-      icon: '🤝',
-      gradient: 'linear-gradient(135deg, #4285f4, #42a5f5)',
-      whatsapp: 'https://chat.whatsapp.com/your-group-link'
+      color: '#4285F4', // Google Blue
+      icon: '🤝'
     },
     {
       id: 'grow',
       title: 'GROW',
       description: 'Transform your ideas into reality by working on impactful projects',
       linkText: 'Start Growing',
-      color: '#23f75ce8',
-      icon: '💡',
-      gradient: 'linear-gradient(135deg, #34a853, #66bb6a)'
+      color: '#34A853', // Google Green
+      icon: '💡'
     },
     {
       id: 'build',
       title: 'BUILD',
       description: 'Develop personally and professionally through collaboration',
       linkText: 'Get Started',
-      color: '#efeb26e2',
-      icon: '🛠️',
-      gradient: 'linear-gradient(135deg, #fbbc05, #ffca28)'
+      color: '#FBBC05', // Google Yellow
+      icon: '🛠️'
     }
   ];
 
-  const handleCardClick = (card) => {
-    if (card.whatsapp) {
-      window.open(card.whatsapp, '_blank');
-    } else {
-      // Handle other card actions
-      console.log(`Clicked on ${card.title} card`);
-    }
-  };
+  useGSAP(() => {
+    // 1. Header & Stats Animation (Slide in from Left)
+    gsap.from(".about-left-content", {
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 75%",
+      },
+      x: -50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // 2. Cards Animation (Slide up staggered)
+
+    gsap.from(".tech-card", {
+      scrollTrigger: {
+        trigger: ".about-right-grid",
+        start: "top 80%",
+      },
+      y: 60,
+      autoAlpha: 0, // Use autoAlpha instead of opacity for better performance
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "back.out(1.2)",
+      clearProps: "all" // Removes inline styles after animation finishes
+    });
+
+    // 3. Number Counting Animation
+    stats.forEach((stat, index) => {
+      const element = document.getElementById(`stat-num-${index}`);
+      gsap.to(element, {
+        innerText: stat.value,
+        duration: 2,
+        snap: { innerText: 1 },
+        scrollTrigger: {
+          trigger: ".stats-grid",
+          start: "top 85%",
+        },
+        ease: "power1.out",
+        onUpdate: function() {
+          element.innerText = Math.ceil(this.targets()[0].innerText) + stat.suffix;
+        }
+      });
+    });
+
+    // 4. Background Grid Parallax
+    gsap.to(".circuit-pattern", {
+      y: 100,
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
+
+  }, { scope: containerRef });
 
   return (
-    <section id="about" className="about" ref={sectionRef}>
+    <section id="about" className="about" ref={containerRef}>
+      {/* Tech Background Pattern */}
+      <div className="circuit-pattern"></div>
+      
       <div className="about-container">
-        <div className={`about-header ${isVisible ? 'animate' : ''}`}>
-          <h2 className="about-title">Why join GDG-CITech?</h2>
-          <p className="about-subtitle">
-            Discover the four pillars that make our community unique
-          </p>
+        
+        {/* LEFT COLUMN: Sticky Header & Stats */}
+        <div className="about-left-content">
+          <div className="header-wrapper">
+            <h2 className="about-title">Why   
+              <span className="highlight gdg-word" aria-label="GDG">
+                <span className="gdg-letter g-blue"> G</span>
+                <span className="gdg-letter g-red">D</span>
+                <span className="gdg-letter g-yellow">G</span>
+              </span>
+              CITech?
+            </h2>
+            <p className="about-subtitle">
+              We are an ecosystem for developers. Discover the four pillars that drive our community's innovation.
+            </p>
+          </div>
+
+          <div className="stats-grid">
+            {stats.map((stat, index) => (
+              <div className="stat-item" key={index}>
+                <div className="stat-number" id={`stat-num-${index}`}>0{stat.suffix}</div>
+                <div className="stat-label">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className={`about-grid ${isVisible ? 'animate' : ''}`}>
-          {cards.map((card, index) => (
-            <div
-              key={card.id}
-              className={`about-card ${card.id}-card`}
-              style={{ '--delay': `${index * 0.2}s`, '--color': card.color }}
-              onClick={() => handleCardClick(card)}
+        {/* RIGHT COLUMN: Feature Cards Grid */}
+        <div className="about-right-grid">
+          {cards.map((card) => (
+            <div 
+              key={card.id} 
+              className="tech-card"
+              style={{ '--accent-color': card.color }}
             >
-              <div className="card-inner">
-                <div className="card-front">
-                  <div className="card-icon" style={{ background: card.gradient }}>
-                    <span className="icon">{card.icon}</span>
-                  </div>
-                  <h3 className="card-title">{card.title}</h3>
-                  <p className="card-description">{card.description}</p>
+              <div className="card-top">
+                <div className="icon-box" style={{ background: card.color }}>
+                  {card.icon}
                 </div>
-                
-                <div className="card-back" style={{ background: card.gradient }}>
-                  <div className="card-back-content">
-                    <h3 className="card-back-title">{card.title}</h3>
-                    <p className="card-back-description">{card.description}</p>
-                    <button className="card-link">
-                      {card.linkText}
-                      <span className="arrow">→</span>
-                    </button>
-                  </div>
-                </div>
+                <h3 className="card-title">{card.title}</h3>
+              </div>
+              <p className="card-description">{card.description}</p>
+              
+              <div className="card-footer">
+                <a href="#" className="tech-link">
+                  {card.linkText} <span>→</span>
+                </a>
               </div>
               
-              <div className="card-glow" style={{ background: card.gradient }}></div>
+              {/* Hover Glow Effect */}
+              <div className="hover-glow" style={{ background: card.color }}></div>
             </div>
           ))}
         </div>
 
-        <div className={`about-bottom ${isVisible ? 'animate' : ''}`}>
-          <div className="stats-container">
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Active Members</div>
-            </div>
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Events Hosted</div>
-            </div>
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Projects Built</div>
-            </div>
-            <div className="stat">
-              <div className="stat-number">+</div>
-              <div className="stat-label">Tech Domains</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div className="floating-shapes">
-        <div className="shape shape-1"></div>
-        <div className="shape shape-2"></div>
-        <div className="shape shape-3"></div>
-        <div className="shape shape-4"></div>
       </div>
     </section>
   );

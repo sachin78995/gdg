@@ -33,6 +33,9 @@
   text-decoration: none;
   color: #1a1a1a;
   margin-left: 1rem;
+  /* Keep logo block from shrinking so text stays visible */
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
 .logo-img {
@@ -47,15 +50,64 @@
 }
 
 .logo-text {
-  font-family: 'Poppins', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Product Sans', 'Google Sans', 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.2vw + 0.6rem, 1.25rem);
+  color: #202124;
+  white-space: nowrap;
+  /* prevent truncation by not forcing an artificial max-width */
+  overflow: visible;
+  text-overflow: clip;
+  flex: 0 0 auto;
+}
+
+.logo-google {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.logo-letter {
+  display: inline-block;
+  font-family: inherit;
   font-weight: 700;
-  font-size: 1.2rem;
-  background: linear-gradient(45deg, #0461f7, #f73928, #f3c232, #19ed51);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 3s ease-in-out infinite;
+  font-size: clamp(1rem, 1.6vw + 0.6rem, 1.5rem);
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.g-blue { color: #4285F4; }
+.g-red { color: #EA4335; }
+.g-yellow { color: #FBBC05; }
+.g-green { color: #34A853; }
+
+.logo-subtext {
+  font-weight: 600;
+  font-size: clamp(0.85rem, 0.9vw + 0.4rem, 1rem);
+  color: #3c4043;
+  margin-left: 0.35rem;
+  white-space: nowrap;
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 768px) {
+  .logo-text { gap: 0.3rem; }
+  .logo-letter { font-size: clamp(0.95rem, 2.2vw, 1.25rem); }
+}
+
+@media screen and (max-width: 600px) {
+  .logo-subtext { display: none; }
+  .logo-img { height: 34px; width: 34px; }
+  .logo-letter { font-size: clamp(0.95rem, 3.2vw, 1.15rem); }
+}
+
+@media screen and (max-width: 400px) {
+  .logo-text { font-size: 0.95rem; }
+  .logo-letter { font-size: 1rem; }
+  .logo-img { height: 30px; width: 30px; }
 }
 
 @keyframes gradientShift {
@@ -68,6 +120,9 @@
   align-items: center;
   gap: 2rem;
   margin-right: 1rem;
+  /* allow menu to grow and take remaining space so logo stays intact */
+  flex: 1 1 auto;
+  justify-content: flex-end;
 }
 
 .nav-item {
