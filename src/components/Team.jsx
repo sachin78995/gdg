@@ -55,7 +55,7 @@ const Team = () => {
       name: "Sachin Sankole",
       role: "Web-Dev Lead",
       department: "ISE",
-      image: "/core-team/SACHIN SANKOLE.jpg",
+      image: "/core-team/sachin.jpg",
       social: {
         github: "https://github.com/sachin78995",
         linkedin: "https://www.linkedin.com/in/sachin-sankole-3975832ab/"
@@ -69,7 +69,7 @@ const Team = () => {
       department: "CSE-IOT",
       image: "/core-team/R VIKRANT.jpg",
       social: {
-        github: "https://github.com/rvikrant",
+        github: "https://github.com/vikrant24iot-rgb",
         linkedin: "https://linkedin.com/in/rvikrant"
       },
       roleColor: "#ea4335",
@@ -104,10 +104,10 @@ const Team = () => {
       name: "Sankarshan V Sastry",
       role: "Embedded Systems Lead",
       department: "ECE",
-      image: "/core-team/SANKARSHAN.jpeg",
+      image: "/core-team/sank.jpg",
       social: {
-        github: "https://github.com/sankarshan",
-        linkedin: "https://linkedin.com/in/sankarshan",
+        github: "https://github.com/sankuwasfound",
+        linkedin: "https://www.linkedin.com/in/sankuwasfound/",
         instagram: "https://www.instagram.com/sankuwasfound?igsh=aTI3Z21wMzVoa2Fq",
       },
       roleColor: "#378ae8ff",
@@ -117,7 +117,7 @@ const Team = () => {
       name: "Kushal Gowder",
       role: "Marketing Lead",
       department: "ISE",
-      image: "/core-team/Kushal Gowder k.jpg",
+      image: "/core-team/kush.jpg",
       social: {
         github: "https://github.com/kushalgowder",
         linkedin: "https://linkedin.com/in/kushalgowder",
@@ -132,8 +132,8 @@ const Team = () => {
       department: "ISE",
       image: "/core-team/Deeksha Subedi.jpg",
       social: {
-        github: "https://github.com/deeksha",
-        linkedin: "https://linkedin.com/in/deeksha",
+        github:" https://github.com/DeekshaSubedi",
+        linkedin: "https://www.linkedin.com/in/deeksha-subedi-777b49312/ ",
         instagram: "https://www.instagram.com/__born_to._.fly?igsh=bWd4eDN3ZHh6a2k1"
       },
       roleColor: "#e91e63",
@@ -145,8 +145,8 @@ const Team = () => {
       department: "ECE",
       image: "/core-team/Gouri Vast.jpg",
       social: {
-        github: "https://github.com/gourivast",
-        linkedin: "https://linkedin.com/in/gourivast",
+        github: "https://github.com/Gouriii28",
+        linkedin: "https://www.linkedin.com/in/gouri-vast-16b955371?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ",
         instagram: "https://www.instagram.com/gourii_28"
       },
       roleColor: "#378ae8ff",

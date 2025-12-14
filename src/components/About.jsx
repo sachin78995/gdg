@@ -11,10 +11,10 @@ const About = () => {
   
   // Define stats data
   const stats = [
-    { label: "Active Members",/* value: 500, */ suffix: "+" },
-    { label: "Events Hosted", /*value: 50,*/ suffix: "+" },
-    { label: "Projects Built", /*value: 30,*/ suffix: "+" },
-    { label: "Tech Domains", /*value: 10, */ suffix: "+" }
+    { label: "Active Members",value: 500, suffix: "+" },
+    { label: "Events Hosted", value: 5,suffix: "+" },
+    { label: "Projects Built", value: 30, suffix: "+" },
+    { label: "Tech Domains", value: 10,  suffix: "+" }
   ];
 
   const cards = [
