@@ -1,250 +1,272 @@
+/* About.css */
+
 .about {
   min-height: 100vh;
-  /* Updated Background to transition smoothly from Home */
-  background: linear-gradient(180deg, #ffffff 0%, #f5f7fa 100%);
+  background-color: #f8f9fa; /* Clean Tech White/Grey */
   padding: 100px 0;
   position: relative;
-  overflow: hidden;
+  /* allow content (cards) to slightly overflow the bottom for a layered look */
+  overflow: visible;
+  color: #202124;
+}
+
+/* 1. Tech Background Pattern (Circuit/Grid) */
+.circuit-pattern {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  background-image: 
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 40px 40px; /* Grid Size */
+  opacity: 0.4;
+  z-index: 0;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
 }
 
 .about-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  /* Make the about content span the full width of the section */
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(1rem, 4vw, 4rem);
   position: relative;
   z-index: 2;
+
+  /* NEW LAYOUT: 2 Columns (full-bleed) */
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Left side smaller, Right side larger */
+  gap: clamp(1.5rem, 3vw, 4rem);
+  align-items: start;
 }
 
-/* REMOVED: opacity/transform/transition from here. GSAP handles it. */
-.about-header {
-  text-align: center;
-  margin-bottom: 4rem;
+/* --- LEFT COLUMN --- */
+.about-left-content {
+  position: sticky;
+  top: 100px; /* Stays visible while scrolling cards */
 }
 
 .about-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
   color: #1a1a1a;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, #4285f4, #ea4335, #fbbc05, #34a853);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 4s ease-in-out infinite;
 }
 
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+.highlight {
+  /* Use same prominent heading font as Home's welcome-text */
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 800;
+  color: #202124; /* match heading color */
+  letter-spacing: 0.4px;
+  background: none !important;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: initial;
 }
+
+/* Per-letter GDG styling to match Home hero */
+.gdg-word {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.18rem;
+  margin: 0 0.25rem;
+}
+
+.gdg-letter {
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1em; /* inherit from heading */
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.g-blue { color: #4285F4; }
+.g-red { color: #EA4335; }
+.g-yellow { color: #FBBC05; }
+.g-green { color: #34A853; }
 
 .about-subtitle {
   font-family: 'Inter', sans-serif;
-  font-size: 1.2rem;
-  color: #4a4a4a;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 1.1rem;
   line-height: 1.6;
+  color: #5f6368;
+  margin-bottom: 3rem;
+  max-width: 400px;
 }
 
-.about-grid {
+/* Stats Dashboard Style */
+.stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
-/* --- CARD STYLES --- */
-.about-card {
-  height: 300px;
-  perspective: 1000px;
-  cursor: pointer;
-  position: relative;
-  /* GSAP will animate this, no need for initial CSS transform */
-}
-
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-style: preserve-3d;
-}
-
-.about-card:hover .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 20px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.card-front {
+.stat-item {
   background: white;
-  border: 1px solid rgba(0,0,0,0.05); /* Added slight border for definition */
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  transition: transform 0.3s ease;
 }
 
-.card-back {
-  transform: rotateY(180deg);
-  color: white;
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-color: #4285f4;
 }
-
-.card-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.icon {
-  font-size: 2.5rem;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.card-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color);
-  margin-bottom: 1rem;
-  letter-spacing: 2px;
-}
-
-.card-description {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #555;
-}
-
-.card-back-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.card-back-description {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.card-link {
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.card-link:hover {
-  background: white;
-  color: #333;
-  transform: translateY(-2px);
-}
-
-.card-glow {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  border-radius: 20px;
-  z-index: -1;
-  filter: blur(15px);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.about-card:hover .card-glow {
-  opacity: 0.4;
-}
-
-/* --- STATS STYLES --- */
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 3rem 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.stat { text-align: center; }
 
 .stat-number {
   font-family: 'Poppins', sans-serif;
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(45deg, #4285f4, #ea4335);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #202124;
 }
 
 .stat-label {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  color: #666;
-  font-weight: 600;
+  font-size: 0.85rem;
+  color: #5f6368;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  margin-top: 0.2rem;
 }
 
-/* --- FLOATING SHAPES --- */
-.floating-shapes {
+/* --- RIGHT COLUMN (CARDS) --- */
+.about-right-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* Pull the cards a bit downward so they spill slightly into the lower area of the section */
+.about-right-grid {
+  transform: translateY(clamp(20px, 6vw, 80px));
+  transition: transform 0.35s ease;
+}
+
+.tech-card {
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+  
+  /* --- FIX START --- */
+  /* Was: transition: all 0.4s ... (This broke GSAP) */
+  /* Change to: Only animate transform/shadow for hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  /* --- FIX END --- */
+  
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+}
+
+.tech-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.card-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #202124;
+}
+
+.card-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #5f6368;
+  flex-grow: 1; /* Pushes footer to bottom */
+}
+
+.card-footer {
+  margin-top: 1.5rem;
+}
+
+.tech-link {
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: gap 0.3s ease;
+}
+
+.tech-link:hover {
+  gap: 10px;
+}
+
+/* Hover Glow Effect */
+.hover-glow {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none; /* Prevents shapes from blocking clicks */
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0;
+  z-index: 0;
+  filter: blur(60px);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.08;
-  /* Animation handled by GSAP now */
+.tech-card:hover .hover-glow {
+  opacity: 0.15; /* Subtle glow of card color */
 }
 
-.shape-1 { width: 100px; height: 100px; background: #4285f4; top: 10%; left: 5%; }
-.shape-2 { width: 150px; height: 150px; background: #ea4335; top: 50%; right: 5%; }
-.shape-3 { width: 80px; height: 80px; background: #fbbc05; bottom: 20%; left: 15%; }
-.shape-4 { width: 120px; height: 120px; background: #34a853; top: 20%; right: 20%; }
-
-/* Media Queries (Keep existing ones) */
-@media screen and (max-width: 768px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .about-card { height: 260px; }
+/* Responsive */
+@media screen and (max-width: 968px) {
+  .about-container {
+    grid-template-columns: 1fr; /* Stack vertically on tablet/mobile */
+    gap: 3rem;
+  }
+  
+  .about-left-content {
+    position: relative;
+    top: 0;
+    text-align: center;
+  }
+  
+  .about-subtitle {
+    margin: 0 auto 2rem;
+  }
+  
+  .about-right-grid {
+    grid-template-columns: 1fr; /* 1 card per row on mobile */
+    transform: translateY(0); /* reset translation on small screens */
+  }
+  
+  .tech-card {
+    height: auto; /* Allow height to adjust */
+  }
 }

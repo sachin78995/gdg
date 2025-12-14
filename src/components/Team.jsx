@@ -547,11 +547,11 @@ const Team = () => {
 
         <div className={`team-stats ${isVisible ? 'animate' : ''}`}>
           <div className="stat-item">
-            <div className="stat-number">12</div>
+            <div className="stat-number">22</div>
             <div className="stat-label">Team Members</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">5+</div>
+            <div className="stat-number">7+</div>
             <div className="stat-label">Departments</div>
           </div>
           <div className="stat-item">
