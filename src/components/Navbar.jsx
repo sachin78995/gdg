@@ -59,13 +59,11 @@ const Navbar = () => {
           <span className="logo-text" aria-label="Google Developer Group - CITech Main">
             <span className="logo-google">
               <span className="logo-letter g-blue">G</span>
-              <span className="logo-letter g-red">o</span>
-              <span className="logo-letter g-yellow">o</span>
-              <span className="logo-letter g-blue">g</span>
-              <span className="logo-letter g-green">l</span>
-              <span className="logo-letter g-red">e</span>
+              <span className="logo-letter g-red">D</span>
+              <span className="logo-letter g-yellow">G</span>
+             
             </span>
-            <span className="logo-subtext"> Developer Group - CITech Main</span>
+            <span className="logo-subtext"> - CITech Main</span>
           </span>
         </div>
 
