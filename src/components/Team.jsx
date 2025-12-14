@@ -70,7 +70,7 @@ const Team = () => {
       image: "/core-team/R VIKRANT.jpg",
       social: {
         github: "https://github.com/vikrant24iot-rgb",
-        linkedin: "https://www.linkedin.com/in/r-vikrant06/"
+        linkedin: "https://www.linkedin.com/in/r-vikrant06"
       },
       roleColor: "#ea4335",
       gradient: "linear-gradient(135deg, #ea4335, #ef5350)"
