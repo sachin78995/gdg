@@ -531,7 +531,18 @@
   }
   
   .team-card {
+    min-width: 280px;
+    max-width: 280px;
     height: 380px;
+  }
+  
+  .scroll-btn {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .horizontal-scroll-wrapper {
+    gap: 0.5rem;
   }
 }
 
@@ -548,13 +559,37 @@
     font-size: 2.5rem;
   }
   
-  .team-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1rem;
+  .team-header {
+    margin-bottom: 3rem;
+  }
+  
+  .horizontal-scroll-wrapper {
+    margin-bottom: 3rem;
+  }
+  
+  .scroll-btn {
+    display: none;
+  }
+  
+  .team-horizontal-scroll {
+    overflow-x: auto;
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .scroll-content {
+    animation: none;
+    gap: 1.5rem;
   }
   
   .team-card {
+    min-width: 260px;
+    max-width: 260px;
     height: 360px;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
   }
   
   .card-front,
@@ -573,12 +608,26 @@
     font-size: 2rem;
   }
   
-  .team-grid {
-    grid-template-columns: 1fr;
+  .team-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .team-horizontal-scroll {
+    padding: 1rem 0.25rem;
+  }
+  
+  .scroll-content {
+    gap: 1rem;
   }
   
   .team-card {
+    min-width: 240px;
+    max-width: 240px;
     height: 340px;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
   }
   
   .image-placeholder,
@@ -592,7 +641,16 @@
   }
   
   .member-name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+  
+  .member-role {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+  }
+  
+  .member-department {
+    font-size: 0.8rem;
   }
   
   .team-stats {
