@@ -42,19 +42,19 @@ const Events = () => {
       id: 1,
       title: '',
       description: '',
-      image: '/images/team.png'
+      image: '/images/up3.png.jpeg'
     },
     {
       id: 2,
       title: '',
       description: '',
-      image: '/images/team.png'
+      image: '/images/up3.png.jpeg'
     },
     {
       id: 3,
-      title: '',
+      title: 'Workshops',
       description: '',
-      image: '/images/team.png'
+      image: '/images/up.png'
     }
   ];
 
