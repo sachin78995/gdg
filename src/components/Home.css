@@ -13,9 +13,13 @@
   position: relative;
   overflow: hidden;
   /* subtle animated gradient background */
-  background: linear-gradient(-45deg, #ffffff, #f0f4ff, #fff5f5, #fffdf0);
+  background: linear-gradient(-45deg, var(--gradient-start), var(--bg-tertiary), #fff5f5, #fffdf0);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
+}
+
+[data-theme='dark'] .home {
+  background: linear-gradient(-45deg, var(--gradient-start), var(--bg-secondary), #1a1a2e, #1e1e1e);
 }
 
 @keyframes gradientBG {
@@ -61,7 +65,7 @@
 .description {
   /* Futuristic style: Orbitron primary, Exo 2 fallback */
   font-family: 'Orbitron', 'Exo 2', 'Inter', system-ui, -apple-system, Roboto, sans-serif;
-  color: #374151; /* slightly muted dark */
+  color: var(--text-secondary);
   font-weight: 500;
   font-size: clamp(0.95rem, 1.2vw + 0.9rem, 1.25rem);
   line-height: 1.75;
@@ -75,13 +79,13 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
+[data-theme='dark'] .description {
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 6px 18px rgba(0,0,0,0.3);
+}
+
 /* =========================================
    2. EXISTING STYLES (KEEP ALL OF THIS BELOW)
    ========================================= */
-
-.home-content {
-  /* Keep empty or for layout if needed */
-}
 
 .logo-container {
   margin-bottom: clamp(1rem, 3vw, 2rem);
@@ -108,7 +112,7 @@
   font-weight: 800;
   margin-bottom: clamp(1rem, 2.5vw, 2rem);
   line-height: 1.15;
-  color: #202124;
+  color: var(--text-primary);
 }
 
 .welcome-word {
@@ -176,8 +180,12 @@
 
 .cta-button.secondary {
   background: transparent;
-  color: #5f6368;
-  border: 1px solid #dadce0;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme='dark'] .cta-button.secondary {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .scroll-indicator {
@@ -192,7 +200,8 @@
 .scroll-arrow {
   width: 2px;
   height: 40px;
-  background: rgba(0, 0, 0, 0.3); /* Darkened for light background */
+  background: var(--text-secondary);
+  opacity: 0.3;
   position: relative;
 }
 
@@ -206,7 +215,8 @@
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 12px solid rgba(0, 0, 0, 0.3);
+  border-top: 12px solid var(--text-secondary);
+  opacity: 0.3;
 }
 
 @keyframes bounce {

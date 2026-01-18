@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,97 +8,76 @@ gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
   const containerRef = useRef();
-  
-  // Define stats data
-  const stats = [
-    { label: "Active Members",value: 500, suffix: "+" },
-    { label: "Events Hosted", value: 5,suffix: "+" },
-    { label: "Projects Built", value: 30, suffix: "+" },
-    { label: "Tech Domains", value: 10,  suffix: "+" }
-  ];
+  const [activeInfo, setActiveInfo] = useState(null);
 
-  const cards = [
+  const pillars = [
     {
       id: 'learn',
       title: 'LEARN',
-      description: 'Expand your knowledge through hands-on workshops',
-      linkText: 'Explore Resources',
-      color: '#EA4335', // Google Red
-      icon: '🎓'
+      color: '#EA4335'
     },
     {
       id: 'connect',
       title: 'CONNECT',
-      description: 'Network with skilled teammates and industry professionals',
-      linkText: 'Join Community',
-      color: '#4285F4', // Google Blue
-      icon: '🤝'
+      color: '#4285F4'
     },
     {
       id: 'grow',
       title: 'GROW',
-      description: 'Transform your ideas into reality by working on impactful projects',
-      linkText: 'Start Growing',
-      color: '#34A853', // Google Green
-      icon: '💡'
+      color: '#34A853'
     },
     {
       id: 'build',
       title: 'BUILD',
-      description: 'Develop personally and professionally through collaboration',
-      linkText: 'Get Started',
-      color: '#FBBC05', // Google Yellow
-      icon: '🛠️'
+      color: '#FBBC05'
     }
   ];
 
   useGSAP(() => {
-    // 1. Header & Stats Animation (Slide in from Left)
-    gsap.from(".about-left-content", {
+    // 1. Header Animation
+    gsap.from(".about-header-new", {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top 75%",
       },
-      x: -50,
+      y: 50,
       opacity: 0,
       duration: 1,
       ease: "power3.out"
     });
 
-    // 2. Cards Animation (Slide up staggered)
-
-    gsap.from(".tech-card", {
+    // 2. Pillar Cards Animation
+    gsap.from(".pillar-card", {
       scrollTrigger: {
-        trigger: ".about-right-grid",
-        start: "top 80%",
+        trigger: ".pillars-grid",
+        start: "top 90%",
+        toggleActions: "play none none reverse"
       },
-      y: 60,
-      autoAlpha: 0, // Use autoAlpha instead of opacity for better performance
-      duration: 0.8,
-      stagger: 0.15,
-      ease: "back.out(1.2)",
-      clearProps: "all" // Removes inline styles after animation finishes
+      y: 30,
+      opacity: 0,
+      scale: 0.98,
+      duration: 0.6,
+      stagger: 0.12,
+      ease: "power2.out",
+      immediateRender: false
     });
 
-    // 3. Number Counting Animation
-    stats.forEach((stat, index) => {
-      const element = document.getElementById(`stat-num-${index}`);
-      gsap.to(element, {
-        innerText: stat.value,
-        duration: 2,
-        snap: { innerText: 1 },
-        scrollTrigger: {
-          trigger: ".stats-grid",
-          start: "top 85%",
-        },
-        ease: "power1.out",
-        onUpdate: function() {
-          element.innerText = Math.ceil(this.targets()[0].innerText) + stat.suffix;
-        }
-      });
+    // 3. Particle Animation
+    gsap.to(".particle", {
+      y: "random(-20, 20)",
+      x: "random(-20, 20)",
+      opacity: "random(0.3, 0.8)",
+      duration: "random(2, 4)",
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      stagger: {
+        each: 0.1,
+        from: "random"
+      }
     });
 
-    // 4. Background Grid Parallax
+    // 4. Background Parallax
     gsap.to(".circuit-pattern", {
       y: 100,
       scrollTrigger: {
@@ -113,61 +92,43 @@ const About = () => {
 
   return (
     <section id="about" className="about" ref={containerRef}>
-      {/* Tech Background Pattern */}
       <div className="circuit-pattern"></div>
       
-      <div className="about-container">
-        
-        {/* LEFT COLUMN: Sticky Header & Stats */}
-        <div className="about-left-content">
-          <div className="header-wrapper">
-            <h2 className="about-title">Why   
-              <span className="highlight gdg-word" aria-label="GDG">
-                <span className="gdg-letter g-blue"> G</span>
-                <span className="gdg-letter g-red">D</span>
-                <span className="gdg-letter g-yellow">G</span>
-              </span>
-              CITech?
-            </h2>
-            <p className="about-subtitle">
-              We are an ecosystem for developers. Discover the four pillars that drive our community's innovation.
-            </p>
-          </div>
+      <div className="about-container-new">
 
-          <div className="stats-grid">
-            {stats.map((stat, index) => (
-              <div className="stat-item" key={index}>
-                <div className="stat-number" id={`stat-num-${index}`}>0{stat.suffix}</div>
-                <div className="stat-label">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* RIGHT COLUMN: Feature Cards Grid */}
-        <div className="about-right-grid">
-          {cards.map((card) => (
+        {/* Four Pillars Grid */}
+        <div className="pillars-grid">
+          {pillars.map((pillar, index) => (
             <div 
-              key={card.id} 
-              className="tech-card"
-              style={{ '--accent-color': card.color }}
+              key={pillar.id}
+              className="pillar-card"
+              style={{ 
+                borderColor: pillar.color,
+                animationDelay: `${index * 0.1}s`
+              }}
             >
-              <div className="card-top">
-                <div className="icon-box" style={{ background: card.color }}>
-                  {card.icon}
-                </div>
-                <h3 className="card-title">{card.title}</h3>
+              {/* Particles */}
+              <div className="particles">
+                {[...Array(12)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="particle" 
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      backgroundColor: pillar.color,
+                      animationDelay: `${i * 0.3}s`
+                    }}
+                  />
+                ))}
               </div>
-              <p className="card-description">{card.description}</p>
+
+              <div className="pillar-corner" style={{ background: pillar.color }}></div>
+              <div className="pillar-corner bottom" style={{ background: pillar.color }}></div>
               
-              <div className="card-footer">
-                <a href="#" className="tech-link">
-                  {card.linkText} <span>→</span>
-                </a>
-              </div>
-              
-              {/* Hover Glow Effect */}
-              <div className="hover-glow" style={{ background: card.color }}></div>
+              <h3 className="pillar-title" style={{ color: pillar.color }}>
+                {pillar.title}
+              </h3>
             </div>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Home, { initializeParticles } from './components/Home';
 import About from './components/About';
@@ -55,30 +56,32 @@ function App() {
   );
 
   return (
-    <div className="App" ref={appRef}>
-      <Navbar />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route 
-            path="/" 
-            element={
-              <AnimatedRoute>
-                {mainPage}
-              </AnimatedRoute>
-            } 
-          />
-          <Route 
-            path="/event-detail" 
-            element={
-              <AnimatedRoute>
-                <EventDetail />
-              </AnimatedRoute>
-            } 
-          />
-        </Routes>
-      </AnimatePresence>
-      {showFooter && <Footer />}
-    </div>
+    <ThemeProvider>
+      <div className="App" ref={appRef}>
+        <Navbar />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route 
+              path="/" 
+              element={
+                <AnimatedRoute>
+                  {mainPage}
+                </AnimatedRoute>
+              } 
+            />
+            <Route 
+              path="/event-detail" 
+              element={
+                <AnimatedRoute>
+                  <EventDetail />
+                </AnimatedRoute>
+              } 
+            />
+          </Routes>
+        </AnimatePresence>
+        {showFooter && <Footer />}
+      </div>
+    </ThemeProvider>
   );
 }
 

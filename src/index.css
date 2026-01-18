@@ -1,5 +1,59 @@
 /* Removed external Google Fonts import — using project's font stacks (contact section style) */
 
+/* ===================================
+   THEME VARIABLES
+   =================================== */
+:root {
+  /* Light Mode Colors (Default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f0f4ff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #374151;
+  --text-tertiary: #3c4043;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --navbar-bg: rgba(255, 255, 255, 0.95);
+  --navbar-scrolled-bg: rgba(255, 255, 255, 0.98);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --gradient-start: #ffffff;
+  --gradient-end: #f0f4ff;
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: linear-gradient(45deg, #4285f4, #ea4335);
+  --about-bg: #f8f9fa;
+  --circuit-opacity: 0.4;
+  --grid-color: #e5e7eb;
+}
+
+[data-theme='dark'] {
+  /* Dark Mode Colors */
+  --bg-primary: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #1e1e2e;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e7eb;
+  --text-tertiary: #d1d5db;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --navbar-bg: rgba(15, 15, 15, 0.95);
+  --navbar-scrolled-bg: rgba(15, 15, 15, 0.98);
+  --card-bg: rgba(26, 26, 26, 0.95);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --gradient-start: #0f0f0f;
+  --gradient-end: #1e1e2e;
+  --scrollbar-track: #1a1a1a;
+  --scrollbar-thumb: linear-gradient(45deg, #4285f4, #ea4335);
+  --about-bg: #1a1a1a;
+  --circuit-opacity: 0.15;
+  --grid-color: #2a2a2a;
+}
+
+/* Smooth theme transition */
+html, body, #root {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* Global Reset and Base Styles */
 * {
   margin: 0;
@@ -19,11 +73,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  color: #1a1a1a;
-  background-color: #ffffff;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
   overflow-x: hidden;
   margin: 0;
   min-width: 320px;
+}
+
+/* Ensure root element also gets the background */
+#root {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
 }
 
 /* Remove default button styles */
@@ -62,11 +122,11 @@ input, textarea, select {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #4285f4, #ea4335);
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 

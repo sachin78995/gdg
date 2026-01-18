@@ -2,19 +2,19 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--navbar-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-color);
   z-index: 1000;
   transition: all 0.3s ease;
   padding: 1rem 0;
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--navbar-scrolled-bg);
   padding: 0.5rem 0;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 20px var(--shadow-color);
 }
 
 .nav-container {
@@ -31,7 +31,7 @@
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  color: #1a1a1a;
+  color: var(--text-primary);
   margin-left: 1rem;
   /* Keep logo block from shrinking so text stays visible */
   flex: 0 0 auto;
@@ -87,7 +87,7 @@
 .logo-subtext {
   font-weight: 600;
   font-size: clamp(0.85rem, 0.9vw + 0.4rem, 1rem);
-  color: #3c4043;
+  color: var(--text-tertiary);
   margin-left: 0.35rem;
   white-space: nowrap;
 }
@@ -135,7 +135,7 @@
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 1rem;
-  color: #1a1a1a;
+  color: var(--text-primary);
   text-decoration: none;
   cursor: pointer;
   padding: 0.5rem 1rem;
@@ -181,7 +181,7 @@
 .bar {
   width: 25px;
   height: 3px;
-  background-color: #1a1a1a;
+  background-color: var(--text-primary);
   transition: all 0.3s ease;
   border-radius: 2px;
 }
@@ -260,5 +260,90 @@
 
   .logo-img {
     height: 30px;
+  }
+}
+
+/* ===================================
+   THEME TOGGLE BUTTON STYLES
+   =================================== */
+.theme-toggle-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: 2px solid var(--border-color);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.theme-toggle-btn:hover {
+  border-color: #4285f4;
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95) rotate(15deg);
+}
+
+.theme-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+  color: #4285f4;
+  transform: rotate(-15deg);
+}
+
+/* Animation for icon change */
+@keyframes iconRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.theme-toggle-btn:active .theme-icon {
+  animation: iconRotate 0.6s ease;
+}
+
+/* Mobile adjustments for theme toggle */
+@media screen and (max-width: 768px) {
+  .theme-toggle-wrapper {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .theme-toggle-btn {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .theme-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .nav-menu {
+    background-color: var(--navbar-bg);
   }
 }

@@ -3,7 +3,10 @@ import './Team.css';
 
 const Team = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  const volunteersScrollRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,6 +24,30 @@ const Team = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
+
+  const scrollVolunteersLeft = () => {
+    if (volunteersScrollRef.current) {
+      volunteersScrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
+
+  const scrollVolunteersRight = () => {
+    if (volunteersScrollRef.current) {
+      volunteersScrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
 
   const teamMembers = [
     {
@@ -322,18 +349,31 @@ const Team = () => {
           </p>
         </div>
 
-        <div className={`team-grid ${isVisible ? 'animate' : ''}`}>
-          {teamMembers.map((member, index) => (
-            <div
-              key={index}
-              className="team-card"
-              style={{ 
-                '--delay': `${index * 0.1}s`,
-                '--role-color': member.roleColor,
-                '--gradient': member.gradient
-              }}
-            >
-              <div className="card-inner">
+        <div className="horizontal-scroll-wrapper">
+          <button className="scroll-btn scroll-btn-left" onClick={scrollLeft} aria-label="Scroll Left">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+
+          <div 
+            className={`team-horizontal-scroll ${isVisible ? 'animate' : ''} ${isPaused ? 'paused' : ''}`} 
+            ref={scrollContainerRef}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <div className="scroll-content">
+              {[...teamMembers, ...teamMembers].map((member, index) => (
+                <div
+                  key={index}
+                  className="team-card"
+                  style={{ 
+                    '--delay': `${index * 0.1}s`,
+                    '--role-color': member.roleColor,
+                    '--gradient': member.gradient
+                  }}
+                >
+                  <div className="card-inner">
                 {/* Front of card */}
                 <div className="card-front">
                   <div className="member-image-container">
@@ -428,6 +468,14 @@ const Team = () => {
               <div className="card-glow"></div>
             </div>
           ))}
+            </div>
+          </div>
+
+          <button className="scroll-btn scroll-btn-right" onClick={scrollRight} aria-label="Scroll Right">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
         </div>
 
         <div className={`team-header ${isVisible ? 'animate' : ''}`} style={{ marginTop: '80px' }}>
@@ -437,18 +485,31 @@ const Team = () => {
           </p>
         </div>
 
-        <div className={`team-grid ${isVisible ? 'animate' : ''}`}>
-          {volunteers.map((volunteer, index) => (
-            <div
-              key={index}
-              className="team-card"
-              style={{ 
-                '--delay': `${(teamMembers.length + index) * 0.1}s`,
-                '--role-color': volunteer.roleColor,
-                '--gradient': volunteer.gradient
-              }}
-            >
-              <div className="card-inner">
+        <div className="horizontal-scroll-wrapper">
+          <button className="scroll-btn scroll-btn-left" onClick={scrollVolunteersLeft} aria-label="Scroll Left">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+
+          <div 
+            className={`team-horizontal-scroll ${isVisible ? 'animate' : ''} ${isPaused ? 'paused' : ''}`}
+            ref={volunteersScrollRef}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <div className="scroll-content">
+              {[...volunteers, ...volunteers].map((volunteer, index) => (
+                <div
+                  key={index}
+                  className="team-card"
+                  style={{ 
+                    '--delay': `${(teamMembers.length + index) * 0.1}s`,
+                    '--role-color': volunteer.roleColor,
+                    '--gradient': volunteer.gradient
+                  }}
+                >
+                  <div className="card-inner">
                 {/* Front of card */}
                 <div className="card-front">
                   <div className="member-image-container">
@@ -543,21 +604,14 @@ const Team = () => {
               <div className="card-glow"></div>
             </div>
           ))}
-        </div>
+            </div>
+          </div>
 
-        <div className={`team-stats ${isVisible ? 'animate' : ''}`}>
-          <div className="stat-item">
-            <div className="stat-number">22</div>
-            <div className="stat-label">Team Members</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">7+</div>
-            <div className="stat-label">Departments</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">8+</div>
-            <div className="stat-label">Specializations</div>
-          </div>
+          <button className="scroll-btn scroll-btn-right" onClick={scrollVolunteersRight} aria-label="Scroll Right">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
         </div>
       </div>
 

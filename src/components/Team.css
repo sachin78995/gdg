@@ -2,7 +2,7 @@
 
 .team {
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--bg-primary);
   padding: 100px 0;
   position: relative;
   overflow: hidden;
@@ -34,7 +34,7 @@
   font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
   font-size: 3rem;
   font-weight: 400;
-  color: #202124;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
 }
@@ -47,11 +47,94 @@
 .team-subtitle {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 1rem;
-  color: #5f6368;
+  color: var(--text-secondary);
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.5;
   font-weight: 400;
+}
+
+/* Horizontal Scroll Wrapper */
+.horizontal-scroll-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.team-horizontal-scroll {
+  display: flex;
+  gap: 2rem;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 2rem 1rem;
+  flex: 1;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 2rem;
+  animation: autoScroll 15s linear infinite;
+}
+
+.team-horizontal-scroll.paused .scroll-content {
+  animation-play-state: paused;
+}
+
+@keyframes autoScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  z-index: 10;
+}
+
+.scroll-btn:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+.scroll-btn:active {
+  transform: scale(0.95);
+}
+
+.scroll-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-theme='dark'] .scroll-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='dark'] .scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .team-grid {
@@ -86,10 +169,13 @@
 }
 
 .team-card {
+  min-width: 320px;
+  max-width: 320px;
   height: 400px;
   perspective: 1000px;
   cursor: pointer;
   position: relative;
+  flex-shrink: 0;
 }
 
 .card-inner {
@@ -116,14 +202,14 @@
 }
 
 .card-front {
-  background: #ffffff;
+  background: var(--card-bg);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  border: 1px solid #e8eaed;
+  border: 1px solid var(--border-color);
   background-clip: padding-box;
-  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  box-shadow: 0 1px 2px 0 var(--shadow-color), 0 1px 3px 1px var(--shadow-color);
   transition: box-shadow 0.2s ease;
 }
 
@@ -185,7 +271,7 @@
   font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
   font-size: 1.25rem;
   font-weight: 500;
-  color: #202124;
+  color: var(--text-primary);
   margin-bottom: 0.75rem;
   line-height: 1.4;
   letter-spacing: -0.01em;
@@ -207,7 +293,7 @@
 .member-department {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 0.875rem;
-  color: #5f6368;
+  color: var(--text-secondary);
   font-weight: 400;
   letter-spacing: 0.01em;
 }
