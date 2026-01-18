@@ -333,7 +333,7 @@
 
 .submit-button {
   width: 100%;
-  max-width: 300px;
+  max-width: 220px;
   margin: 1.5rem auto 0;
   display: flex;
   align-items: center;
@@ -354,11 +354,11 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
-  padding: 1.2rem 2rem;
+  padding: 1rem 1.75rem;
   border-radius: 15px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 1rem;
@@ -414,8 +414,8 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .submit-button {
-    padding: 0.9rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.85rem 1.4rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -423,7 +423,7 @@
   .submit-button {
     width: 100%;
     max-width: 100%;
-    padding: 0.8rem 1.2rem;
+    padding: 0.75rem 1.2rem;
   }
 }
 
