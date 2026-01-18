@@ -40,21 +40,21 @@ const Events = () => {
   const events = [
     {
       id: 1,
-      title: 'Event on Embedded Systems',
-      description: 'Hands-On Cybersecurity: Defend, Detect, Deploy - A Practical Experience',
-      image: '/images/event1.jpg'
+      title: '',
+      description: '',
+      image: '/images/team.png'
     },
     {
       id: 2,
-      title: 'Info session',
-      description: 'GDG CIT pulled off a fantastic Info Session for the Google Solution Challenge 2025.....',
-      image: '/images/event2.jpg'
+      title: '',
+      description: '',
+      image: '/images/team.png'
     },
     {
       id: 3,
-      title: 'Workshops',
-      description: 'Hands-on workshops provide practical skills, expert guidance, and collaborative learning.',
-      image: '/images/event3.jpg'
+      title: '',
+      description: '',
+      image: '/images/team.png'
     }
   ];
 
