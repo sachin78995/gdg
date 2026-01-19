@@ -67,7 +67,7 @@ const Team = () => {
       name: "K.Lakshmi Navyatha",
       role: "Curation Lead",
       department: "ISE",
-      image: "/core-team/K.Lakshmi Navyatha.jpg",
+      image: "/core-team/nai.png",
       social: {
         github: "https://github.com/kancharlanavyatha",
         linkedin: "https://www.linkedin.com/in/k-lakshmi-navyatha-453151293/",
