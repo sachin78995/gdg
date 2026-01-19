@@ -160,17 +160,13 @@ const Footer = () => {
                   </span>
                 </div>
               </div>
-            </div>
-
-            <div className="footer-section">
-              <h4 className="footer-heading">Follow Us</h4>
               <div className="social-links-grid">
                 <a
                   href="https://chat.whatsapp.com/ISzPWBcam0C4w8c4R7bbr6"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link-item"
-                  aria-label="Follow us on WhatsApp"
+                  aria-label="WhatsApp"
                 >
                   <span className="social-label">WhatsApp</span>
                 </a>
@@ -179,7 +175,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link-item"
-                  aria-label="Follow us on Instagram"
+                  aria-label="Instagram"
                 >
                   <span className="social-label">Instagram</span>
                 </a>
@@ -188,7 +184,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link-item"
-                  aria-label="Follow us on GitHub"
+                  aria-label="GitHub"
                 >
                   <span className="social-label">GitHub</span>
                 </a>
@@ -197,7 +193,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link-item"
-                  aria-label="Follow us on LinkedIn"
+                  aria-label="LinkedIn"
                 >
                   <span className="social-label">LinkedIn</span>
                 </a>
