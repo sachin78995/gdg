@@ -302,9 +302,9 @@ const Team = () => {
       name: "Divya Shree N",
       role: "Social Media",
       department: "ECE ",
-      image: "/Volunteers/Divya Shree N.jpg",
+      image: "/Volunteers/divya.png.jpeg",
       social: {
-        github: "https://www.linkedin.com/in/divya-undefined-691461335?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        github: "https://github.com/divyashree24ece-a11y",
         linkedin: "https://www.linkedin.com/in/divya-undefined-691461335?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
         instagram: "https://www.instagram.com/divya_shree._.4/"
       },
