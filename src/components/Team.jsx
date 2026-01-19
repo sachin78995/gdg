@@ -106,7 +106,7 @@ const Team = () => {
       name: "Himashree Kolisetty",
       role: "Curation Co-Lead",
       department: "CSE",
-      image: "/Volunteers/him.png.jpeg",
+      image: "/core-team/him.png.jpeg",
       social: {
         github: "https://github.com/himashree",
         linkedin: "https://in.linkedin.com/in/himashree-kolisetty-b046a338b",
