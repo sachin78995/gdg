@@ -289,7 +289,7 @@ const Team = () => {
       name: "FAWAZ HUSAIN M ",
       role: "Marketing & Sponsorships",
       department: "ISE ",
-      image: "/Volunteers/FAWAZ HUSAIN M.jpg",
+      image: "/Volunteers/fav.png",
       social: {
         github: "",
         linkedin: "https://www.linkedin.com/in/fawaz2008?utm_source=share_via&utm_content=profile&utm_medium=member_android",
