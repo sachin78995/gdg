@@ -211,9 +211,9 @@ const Team = () => {
       name: "Rajesh Narayan L ",
       role: "Design",
       department: "CSE",
-      image: "/Volunteers/Rajesh Narayan L.jpg",
+      image: "/Volunteers/raj.png",
       social: {
-        github: "",
+        github: "https://github.com/rajeshgit29",
         linkedin: "https://www.linkedin.com/in/rajesh-narayan-89a265317?utm_source=share_via&utm_content=profile&utm_medium=member_android",
         instagram: "https://www.instagram.com/_.rajeshx_?igsh=MWpoYXdsNWFicmx5dQ=="
       },
