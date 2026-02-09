@@ -7,6 +7,7 @@ import Home, { initializeParticles } from './components/Home';
 import About from './components/About';
 import Events from './components/Events';
 import Team from './components/Team';
+import Credits from './components/Credits';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import EventDetail from './components/EventDetail';
@@ -51,6 +52,7 @@ function App() {
       <About />
       <Events />
       <Team />
+      <Credits />
       <Contact />
     </main>
   );
@@ -70,7 +72,7 @@ function App() {
               } 
             />
             <Route 
-              path="/event-detail" 
+              path="/event-detail/:id" 
               element={
                 <AnimatedRoute>
                   <EventDetail />

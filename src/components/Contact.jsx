@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Contact.css';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const formRef=useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -9,7 +11,6 @@ const Contact = () => {
     email: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
   
   const sectionRef = useRef(null);
@@ -30,7 +31,7 @@ const Contact = () => {
 
     return () => observer.disconnect();
   }, []);
-
+ const [loading,setLoading]= useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -41,22 +42,29 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setLoading(true);
+
     
     // Simulate form submission
     try {
       // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
+     
       
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await emailjs.sendForm(
+        import.meta.env.VITE_APP_EMAILJS_ID,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_APP_PUBLIC_KEY,
+      )
       
       setSubmitStatus('success');
       setFormData({ firstName: '', lastName: '', email: '', message: '' });
     } catch (error) {
+      console.error('EMAILJS Error',error);
       setSubmitStatus('error');
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
       
       // Reset status after 3 seconds
       setTimeout(() => {
@@ -161,7 +169,7 @@ const Contact = () => {
           </div>
 
           <div className={`contact-form-section ${isVisible ? 'animate' : ''}`}>
-            <form onSubmit={handleSubmit} className="contact-form">
+            <form onSubmit={handleSubmit} className="contact-form"ref={formRef} >
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="firstName">First Name *</label>
@@ -219,11 +227,12 @@ const Contact = () => {
               </div>
 
               <button
+
                 type="submit"
-                disabled={isSubmitting || !formData.firstName || !formData.email}
-                className={`submit-button ${isSubmitting ? 'submitting' : ''} ${submitStatus}`}
+                disabled={loading}
+                className={`submit-button ${loading ? 'submitting' : ''} ${submitStatus}`}
               >
-                {isSubmitting ? (
+                {loading ? (
                   <>
                     <div className="spinner"></div>
                     Sending...
