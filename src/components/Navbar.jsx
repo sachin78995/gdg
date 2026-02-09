@@ -14,7 +14,7 @@ const Navbar = () => {
       setScrolled(offset > 50);
 
       // Update active section based on scroll position
-      const sections = ['home', 'about', 'events', 'team', 'contact'];
+      const sections = ['home', 'about', 'events', 'team', 'credits', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -49,6 +49,10 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <div className="nav-logo">
+        <button 
+              className={`nav-logo-link`}
+              onClick={() => scrollToSection('home')}
+            >
           <img 
             src="/images/img5.jpg.png" 
             alt="GDG-CITech" 
@@ -57,6 +61,7 @@ const Navbar = () => {
               e.target.src = "/images/logoNObg.svg";
             }}
           />
+          </button>
 
           <span className="logo-text" aria-label="Google Developer Group - CITech Main">
             <span className="logo-google">
@@ -100,6 +105,14 @@ const Navbar = () => {
               onClick={() => scrollToSection('team')}
             >
               Team
+            </button>
+          </div>
+          <div className="nav-item">
+            <button 
+              className={`nav-link ${activeSection === 'credits' ? 'active' : ''}`}
+              onClick={() => scrollToSection('credits')}
+            >
+              Credits
             </button>
           </div>
           <div className="nav-item">

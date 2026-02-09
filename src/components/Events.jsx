@@ -5,7 +5,6 @@ import logo from '/images/google-gemini-logo1.png';
 
 const Events = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [clickedCard, setClickedCard] = useState(null);
   const sectionRef = useRef(null);
   const navigate = useNavigate();
 
@@ -27,34 +26,30 @@ const Events = () => {
   }, []);
 
   const handleCardClick = (eventId) => {
-    setClickedCard(eventId);
-    setTimeout(() => {
-      setClickedCard(null);
-    }, 500);
-  };
-
-  const handleMoreInfo = () => {
-    navigate('/event-detail');
+    navigate(`/event-detail/${eventId}`);
   };
 
   const events = [
     {
       id: 1,
-      title: '',
-      description: '',
-      image: '/images/up3.png.jpeg'
+      title: 'Robotics and Embedded Systems Workshop',
+      description: 'A hands-on workshop where participants will learn about robotics and embedded systems, and build their own robots.',
+      image: '/events/event-1/img-2.jpg',
+      page:'/'
     },
     {
       id: 2,
-      title: '',
-      description: '',
-      image: '/images/up3.png.jpeg'
+      title: 'PulseX - Leveraging the Power of AI',
+      description: 'PulseX – Leveraging the Power of AI was an open-innovation hackathon organized by GDGoC – CIT, aimed at encouraging students to identify real-world and social problem statements and build impactful, feasible solutions using Google technologies. The event emphasized practical implementation, innovation, and real-world relevance over mere technical complexity.',
+      image: '/events/event-2/event-2.jpg',
+      page:'/'
     },
     {
       id: 3,
       title: 'Workshops',
-      description: '',
-      image: '/images/up.png'
+      description: 'Hands-on learning sessions covering various programming languages and frameworks.',
+      image: '/images/up.png',
+      page:'/'
     }
   ];
 
@@ -66,9 +61,9 @@ const Events = () => {
           {events.map((event, index) => (
             <div key={event.id} className="events-card-container">
               <div 
-                className={`google-card ${isVisible ? 'animate' : ''} ${clickedCard === event.id ? 'clicked' : ''}`} 
+                className={`google-card ${isVisible ? 'animate' : ''} ${event.id === 3 ? 'no-click' : ''}`} 
                 style={{ transitionDelay: `${index * 0.1}s` }}
-                onClick={() => handleCardClick(event.id)}
+                onClick={event.id !== 3 ? () => handleCardClick(event.id) : undefined}
               >
                 <div className="event-image-wrapper">
                   <img src={event.image} alt={event.title} className="event-image" />
