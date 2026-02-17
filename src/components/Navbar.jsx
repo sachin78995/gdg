@@ -112,7 +112,7 @@ const Navbar = () => {
               className={`nav-link ${activeSection === 'credits' ? 'active' : ''}`}
               onClick={() => scrollToSection('credits')}
             >
-              Credits
+              DevSpace
             </button>
           </div>
           <div className="nav-item">
