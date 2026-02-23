@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './EventDetail.css';
+import Events from './Events';
 
 const EVENT_RECORD_FALLBACK = '/events/event-1/event-record.docx';
 
@@ -204,4 +205,4 @@ const EventDetail = () => {
   );
 };
 
-export default EventDetail;
+export default EventDetail
