@@ -34,14 +34,14 @@ const Events = () => {
       id: 1,
       title: 'Robotics and Embedded Systems Workshop',
       description: 'A hands-on workshop where participants will learn about robotics and embedded systems, and build their own robots.',
-      image: '/events/event-1/img-2.jpg',
+      image: '/events/event-1/img-3.jpg',
       page:'/'
     },
     {
       id: 2,
       title: 'PulseX - Leveraging the Power of AI',
       description: 'PulseX – Leveraging the Power of AI was an open-innovation hackathon organized by GDGoC – CIT, aimed at encouraging students to identify real-world and social problem statements and build impactful, feasible solutions using Google technologies. The event emphasized practical implementation, innovation, and real-world relevance over mere technical complexity.',
-      image: '/events/event-2/event-2.jpg',
+      image: '/events/event-2/img-4.jpg',
       page:'/'
     },
     {
