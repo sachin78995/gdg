@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,28 +10,46 @@ const About = () => {
   const containerRef = useRef();
   const [activeInfo, setActiveInfo] = useState(null);
 
-  const pillars = [
-    {
-      id: 'learn',
-      title: 'LEARN',
-      color: '#EA4335'
-    },
-    {
-      id: 'connect',
-      title: 'CONNECT',
-      color: '#4285F4'
-    },
-    {
-      id: 'grow',
-      title: 'GROW',
-      color: '#34A853'
-    },
-    {
-      id: 'build',
-      title: 'BUILD',
-      color: '#FBBC05'
+  // Auto-close description after 5 seconds
+  useEffect(() => {
+    if (activeInfo) {
+      const timer = setTimeout(() => {
+        setActiveInfo(null);
+      }, 5000);
+
+      return () => clearTimeout(timer);
     }
-  ];
+  }, [activeInfo]);
+const pillars = [
+  {
+    id: 'learn',
+    title: 'LEARN',
+    color: '#EA4335',
+    description: 'Gain practical skills through workshops, tech talks, and hands-on sessions that keep you updated with modern technologies.'
+  },
+  {
+    id: 'connect',
+    title: 'CONNECT',
+    color: '#4285F4',
+    description: 'Network with developers, mentors, and industry experts while collaborating in a supportive tech community.'
+  },
+  {
+    id: 'grow',
+    title: 'GROW',
+    color: '#34A853',
+    description: 'Strengthen technical and professional skills through mentorship, projects, and real-world learning experiences.'
+  },
+  {
+    id: 'build',
+    title: 'BUILD',
+    color: '#FBBC05',
+    description: 'Create impactful solutions by building projects, contributing to open source, and participating in hackathons.'
+  }
+];
+
+  const toggleCard = (id) => {
+    setActiveInfo(activeInfo === id ? null : id);
+  };
 
   useGSAP(() => {
     // 1. Header Animation
@@ -101,11 +119,13 @@ const About = () => {
           {pillars.map((pillar, index) => (
             <div 
               key={pillar.id}
-              className="pillar-card"
+              className={`pillar-card ${activeInfo === pillar.id ? 'active' : ''}`}
               style={{ 
                 borderColor: pillar.color,
-                animationDelay: `${index * 0.1}s`
+                animationDelay: `${index * 0.1}s`,
+                '--card-color': pillar.color
               }}
+              onClick={() => toggleCard(pillar.id)}
             >
               {/* Particles */}
               <div className="particles">
@@ -129,6 +149,11 @@ const About = () => {
               <h3 className="pillar-title" style={{ color: pillar.color }}>
                 {pillar.title}
               </h3>
+              
+              {/* Description overlay */}
+              <div className="pillar-description">
+                <p>{pillar.description}</p>
+              </div>
             </div>
           ))}
         </div>
