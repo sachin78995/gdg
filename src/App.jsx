@@ -11,6 +11,7 @@ import Credits from './components/Credits';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import EventDetail from './components/EventDetail';
+import MemberProfile from './components/MemberProfile';
 import './App.css';
 
 const AnimatedRoute = ({ children }) => {
@@ -76,6 +77,14 @@ function App() {
               element={
                 <AnimatedRoute>
                   <EventDetail />
+                </AnimatedRoute>
+              } 
+            />
+            <Route 
+              path="/team/:slug" 
+              element={
+                <AnimatedRoute>
+                  <MemberProfile />
                 </AnimatedRoute>
               } 
             />

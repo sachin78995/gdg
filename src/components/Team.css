@@ -54,6 +54,23 @@
   font-weight: 400;
 }
 
+/* Magic Bento wrapper (Core Team) */
+.team-bento {
+  margin: 0 auto 4rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease 0.15s;
+}
+
+.team-bento.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.team .team-bento .card-grid {
+  max-width: 72rem;
+}
+
 /* Horizontal Scroll Wrapper */
 .horizontal-scroll-wrapper {
   position: relative;
@@ -176,6 +193,192 @@
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
+}
+
+/* Futuristic Profile Card style for Core Team (inspired by React Bits Profile Card) */
+.team-card.profile-card {
+  height: 380px;
+  perspective: 1200px;
+}
+
+.profile-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1.75rem 1.5rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(148, 163, 184, 0.18), transparent 60%),
+    var(--card-bg);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.8);
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.55s ease,
+    border-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-card-glow {
+  position: absolute;
+  inset: -16px;
+  border-radius: 28px;
+  background: var(--gradient);
+  opacity: 0;
+  filter: blur(24px);
+  z-index: -1;
+  transition: opacity 0.6s ease;
+}
+
+.team-card.profile-card:hover .profile-card-inner {
+  transform: rotateX(6deg) rotateY(-6deg) translateY(-6px);
+  border-color: var(--role-color);
+  box-shadow:
+    0 24px 65px rgba(15, 23, 42, 1),
+    0 0 30px rgba(59, 130, 246, 0.45);
+}
+
+.team-card.profile-card:hover .profile-card-glow {
+  opacity: 0.9;
+}
+
+.profile-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+}
+
+.profile-text {
+  text-align: left;
+}
+
+.profile-title {
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.profile-subtitle {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--role-color);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.25rem;
+}
+
+.profile-meta {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.profile-card-body {
+  margin-top: 1.5rem;
+}
+
+.profile-tagline {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.profile-card-footer {
+  margin-top: 1.75rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-social-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.profile-social-link {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.16), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 1),
+    0 8px 22px rgba(15, 23, 42, 1);
+  color: var(--text-primary);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.profile-social-link:hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: var(--role-color);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 1),
+    0 14px 30px rgba(37, 99, 235, 0.7);
+}
+
+.profile-social-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Light theme tweaks for profile card */
+[data-theme='light'] .profile-card-inner {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(226, 232, 240, 0.9), transparent 60%),
+    #f9fafb;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(148, 163, 184, 0.28);
+}
+
+[data-theme='light'] .team-card.profile-card:hover .profile-card-inner {
+  box-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.16),
+    0 0 24px rgba(59, 130, 246, 0.35);
+}
+
+[data-theme='light'] .profile-card-glow {
+  filter: blur(30px);
+}
+
+[data-theme='light'] .profile-social-link {
+  background: radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 1), #e5e7eb);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(209, 213, 219, 0.8),
+    0 10px 24px rgba(15, 23, 42, 0.16);
+  color: #111827;
+}
+
+[data-theme='light'] .profile-social-link:hover {
+  box-shadow:
+    0 0 0 1px rgba(156, 163, 175, 0.9),
+    0 16px 32px rgba(15, 23, 42, 0.22);
 }
 
 .card-inner {

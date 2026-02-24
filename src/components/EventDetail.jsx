@@ -71,7 +71,7 @@ const EventDetail = () => {
           <h1 className="eventDetailTitle">Event not found</h1>
           <button
             type="button"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/', { state: { scrollTo: 'events' } })}
             className="eventDetailBack"
           >
             Back to Events
@@ -93,7 +93,7 @@ const EventDetail = () => {
       <div className="eventDetailShell">
         <motion.button
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/', { state: { scrollTo: 'events' } })}
           className="eventDetailBack"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}

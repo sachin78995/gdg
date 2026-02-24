@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { TextPlugin } from "gsap/TextPlugin";
@@ -12,6 +13,7 @@ const Home = () => {
   const containerRef = useRef();
   const logoRef = useRef();
   const buttonRef = useRef();
+  const location = useLocation();
 
  useGSAP(() => {
     let mm = gsap.matchMedia();
@@ -71,6 +73,26 @@ const Home = () => {
   useEffect(() => {
     initializeParticles();
   }, []);
+
+  // Scroll to a section if navigation state requested it (e.g. from EventDetail)
+  useEffect(() => {
+    try {
+      const target = location?.state?.scrollTo;
+      if (target) {
+        const el = document.getElementById(target);
+        if (el) {
+          // smooth scroll to the element
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+        // remove the state so repeated mounts don't re-trigger the scroll
+        if (window && window.history && window.history.replaceState) {
+          window.history.replaceState({}, document.title, window.location.pathname + window.location.search + window.location.hash);
+        }
+      }
+    } catch (e) {
+      // noop
+    }
+  }, [location]);
 
   // Simple Hover Functions for Buttons
   const onHoverEnter = (e) => {
